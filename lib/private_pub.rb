@@ -1,6 +1,7 @@
 require "digest/sha1"
 require "net/http"
 require "net/https"
+require 'erb'
 
 require "private_pub/faye_extension"
 require "private_pub/engine" if defined? Rails
@@ -58,6 +59,7 @@ module PrivatePub
     # Any options passed are merged to the hash.
     def subscription(options = {})
       sub = {:server => config[:server], :timestamp => (Time.now.to_f * 1000).round}.merge(options)
+      p [config, sub, options]
       sub[:signature] = Digest::SHA1.hexdigest([config[:secret_token], sub[:channel], sub[:timestamp]].join)
       sub
     end
