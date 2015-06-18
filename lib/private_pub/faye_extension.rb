@@ -23,7 +23,7 @@ module PrivatePub
       elsif PrivatePub.signature_expired? message["ext"]["private_pub_timestamp"].to_i
         message["error"] = "Signature has expired."
       end
-      puts message.inspect if message.has_key? 'error'
+      #puts message.inspect if message.has_key? 'error'
     end
 
     # Ensures the secret token is correct before publishing.
@@ -35,7 +35,7 @@ module PrivatePub
       else
         message["ext"]["private_pub_token"] = nil
       end
-      puts message.inspect if message.has_key? 'error'
+      #puts message.inspect if message.has_key? 'error'
     end
   end
 end
